@@ -1,12 +1,22 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>{% block title %}{% endblock %} - medEcare </title>
-    </head>
-    <body>
-        {% block content %}
+{% from 'form_helper.html' import displayField %}
+
+{% extends 'base.html' %}
+
+{% block title %} Login  {% endblock %}
+
+{% block content %}
+    <h1>Login now!</h1>
+    <p>Enter your username/password to start med-e-care.</p>
+
+    <form action="{{ url_for('login') }}", method="POST">
+        {{displayField(form.username, 'Username', autocomplete="off", autofocus=true)}}
+        {{displayField(form.password, 'Password')}}
+
+        <div>
+            {{ form.submit_button }}
+        </div>
+
+        {{ form.csrf_token }}
         
-        {% endblock %}
-    </body>
-</html>
+    </form>
+{% endblock %}
