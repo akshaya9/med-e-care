@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for,flash
 from passlib.hash import pbkdf2_sha256 #password based key dervation func version2 for hashing
 from flask_login import LoginManager,login_user, current_user, login_required, logout_user
 from wtform_fields import *
@@ -61,6 +61,22 @@ def logout():
     logout_user()
     return "You've logged out successfully!"
 
+
+@app.route('/account',methods = ['POST', 'GET'])
+def account():
+    UpdateAccount_form = UpdateAccountForm()
+    if UpdateAccount_form.validate_on_submit():
+        username = UpdateAccount_form.username.data
+        firstname= UpdateAccount_form.firstname.data
+        lastname= UpdateAccount_form.lastname.data
+        address= UpdateAccount_form.address.data
+        mobileno= UpdateAccount_form.mobileno.data
+        update_user = UpdateUser(username=username, firstname=firstname, lastname=lastname, address=address, mobileno=mobileno)
+        db.session.add(update_user)
+        db.session.commit()
+        return "Details Updated successfully"
+    #    return redirect(url_for('login'))
+    return render_template("account.html",form= UpdateAccount_form)
 
 
 #always true

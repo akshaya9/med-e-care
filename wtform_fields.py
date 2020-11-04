@@ -37,3 +37,22 @@ class LoginForm(FlaskForm):
     username = StringField('username_label', validators=[InputRequired(message="Username required")])
     password = PasswordField('password_label', validators=[InputRequired(message="Password required"), invalid_credentials])
     submit_button = SubmitField('Login')
+
+
+class UpdateAccountForm(FlaskForm):
+    username = StringField('username_label', validators=[InputRequired(message="username required")])
+    firstname = StringField('firstname_label', validators=[InputRequired(message="firstname required")])
+    lastname = StringField('lastname_label', validators=[InputRequired(message="lastname required")])
+    address = StringField('address_label', validators=[InputRequired(message="address required")])
+    mobileno = StringField('mobileno_label', validators=[InputRequired(message="mobileno required")])
+    #email = StringField('Email',validators=[DataRequired(), Email()])
+    #picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
+    submit_update = SubmitField('Update')
+
+
+
+#    def validate_email(self, email):
+#        if email.data != current_user.email:
+#            user = User.query.filter_by(email=email.data).first()
+#            if user:
+#                raise ValidationError('That email is taken. Please choose a different one.')
