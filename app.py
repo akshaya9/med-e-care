@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, url_for
-
+from passlib.hash import pbkdf2_sha256 #password based key dervation func version2 for hashing
 from wtform_fields import *
 from models import *
 
@@ -16,8 +16,11 @@ def index():
     if reg_form.validate_on_submit():
         username = reg_form.username.data
         password  =reg_form.password.data
+
+        #hash password
+        hashed_pswd = pbkdf2_sha256.hash(password)
         #adding user to db
-        user = User(username=username, password=password)
+        user = User(username=username, password=hashed_pswd)
         db.session.add(user)
         db.session.commit()
 
