@@ -3,6 +3,9 @@ from passlib.hash import pbkdf2_sha256 #password based key dervation func versio
 from flask_login import LoginManager,login_user, current_user, login_required, logout_user
 from wtform_fields import *
 from models import *
+from flask import session
+from sqlalchemy.orm.exc import UnmappedClassError, UnmappedInstanceError
+
 
 app  = Flask(__name__)
 app.secret_key = 'should be changed'
@@ -66,16 +69,27 @@ def logout():
 def account():
     UpdateAccount_form = UpdateAccountForm()
     if UpdateAccount_form.validate_on_submit():
+        #import pdb; pdb.set_trace()
         username = UpdateAccount_form.username.data
         firstname= UpdateAccount_form.firstname.data
         lastname= UpdateAccount_form.lastname.data
         address= UpdateAccount_form.address.data
         mobileno= UpdateAccount_form.mobileno.data
-        update_user = UpdateUser(username=username, firstname=firstname, lastname=lastname, address=address, mobileno=mobileno)
-        db.session.add(update_user)
+        old_user =UpdateUser.query.filter_by(username=username).first()
+        if bool(old_user):
+            old_user.firstname= firstname
+            old_user.lastname= lastname
+            old_user.address= address
+            old_user.mobileno= mobileno
+            db.session.merge(old_user)
+            db.session.commit()
+            flash("Details Updated successfully")
+            return redirect(url_for('dashboard'))
+        new_user = UpdateUser( username=username,firstname=firstname, lastname=lastname, address=address, mobileno=mobileno)
+        db.session.add(new_user)
         db.session.commit()
-        return "Details Updated successfully"
-    #    return redirect(url_for('login'))
+        flash("Details saved successfully")
+        return redirect(url_for('dashboard'))
     return render_template("account.html",form= UpdateAccount_form)
 
 
