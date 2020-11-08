@@ -69,7 +69,7 @@ def logout():
 def account():
     UpdateAccount_form = UpdateAccountForm()
     if UpdateAccount_form.validate_on_submit():
-        #import pdb; pdb.set_trace()
+        import pdb; pdb.set_trace()
         username = UpdateAccount_form.username.data
         firstname= UpdateAccount_form.firstname.data
         lastname= UpdateAccount_form.lastname.data
@@ -84,13 +84,37 @@ def account():
             db.session.merge(old_user)
             db.session.commit()
             flash("Details Updated successfully")
-            return redirect(url_for('dashboard'))
+            return render_template("account.html", form= UpdateAccount_form)
         new_user = UpdateUser( username=username,firstname=firstname, lastname=lastname, address=address, mobileno=mobileno)
         db.session.add(new_user)
         db.session.commit()
         flash("Details saved successfully")
-        return redirect(url_for('dashboard'))
+        return render_template("account.html", form= UpdateAccount_form)
     return render_template("account.html",form= UpdateAccount_form)
+
+@app.route("/checkout", methods=['GET', 'POST'])
+# @login_required
+def checkout():
+    checkout_form = CheckOutForm()
+    if checkout_form.validate_on_submit():
+        #import pdb; pdb.set_trace()
+        Full_Name = checkout_form.Full_Name.data
+        Email = checkout_form.Email.data
+        Address = checkout_form.Address.data
+        City = checkout_form.City.data
+        State = checkout_form.State.data
+        Pin_Code = checkout_form.Pin_Code.data
+        Name_on_Card = checkout_form.Name_on_Card.data
+        Credit_card_number = checkout_form.Credit_card_number.data
+        Exp_Month = checkout_form.Exp_Month.data
+        Exp_Year = checkout_form.Exp_Year.data
+        CVV = checkout_form.CVV.data
+        #new_user = UpdateUser( username=username,firstname=firstname, lastname=lastname, address=address, mobileno=mobileno)
+        #db.session.add(new_user)
+        #db.session.commit()
+        flash("Order Placed Successfully")
+        return render_template("checkout.html",form= checkout_form)
+    return render_template("checkout.html",form= checkout_form)
 
 
 #always true

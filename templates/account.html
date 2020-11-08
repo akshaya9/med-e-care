@@ -4,9 +4,16 @@
 
 {% block title %} Account  {% endblock %}
 
+
 {% block content %}
 
-
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <h3>{{ message }}</h3>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
     <form action="{{ url_for('account') }}", method="POST">
         {{displayField(form.username, 'Username', autocomplete="off", autofocus=true)}}
         {{displayField(form.firstname, 'firstname', autocomplete="off", autofocus=true)}}
@@ -21,4 +28,7 @@
         {{ form.csrf_token }}
 
     </form>
+
+
+
 {% endblock %}

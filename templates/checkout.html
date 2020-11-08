@@ -1,0 +1,38 @@
+{% from 'form_helper.html' import displayField %}
+
+{% extends "base.html" %}
+
+{% block title %} Registration  {% endblock %}
+
+{% block content %}
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <h3>{{ message }}</h3>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+    <h1>Fill the details to Checkout!</h1>
+
+    <form action="{{ url_for('checkout') }}", method="POST">
+
+        {{displayField(form.Full_Name, 'Full Name', autocomplete="off", autofocus=true)}}
+        {{displayField(form.Email, 'Email')}}
+        {{displayField(form.Address, 'Address')}}
+        {{displayField(form.City, 'City')}}
+        {{displayField(form.State, 'State')}}
+        {{displayField(form.Pin_Code, 'Pin Code')}}
+        {{displayField(form.Name_on_Card, 'Name on Card')}}
+        {{displayField(form.Credit_card_number, 'Credit card number')}}
+        {{displayField(form.Exp_Month, 'Exp Month')}}
+        {{displayField(form.Exp_Year, 'Exp Year')}}
+        {{displayField(form.CVV, 'CVV')}}
+
+        <div>
+            {{ form.submit_checkout }}
+        </div>
+
+        {{ form.csrf_token }}
+
+    </form>
+{% endblock %}

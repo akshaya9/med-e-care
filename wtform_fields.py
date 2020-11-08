@@ -50,6 +50,23 @@ class UpdateAccountForm(FlaskForm):
     submit_update = SubmitField('Update')
 
 
+class CheckOutForm(FlaskForm):
+    Full_Name = StringField('Full_Name_label', validators=[InputRequired(message="Full Name")])
+    Email = StringField('Email_label', validators=[InputRequired(message="name@gmail.com")])
+    Address = StringField('Address _label', validators=[InputRequired(message="Flat No, Building Name, Street Name")])
+    City = StringField('City_label', validators=[InputRequired(message="City")])
+    State = StringField('State_label', validators=[InputRequired(message="State")])
+    Pin_Code = StringField('Pin_Code_label', validators=[InputRequired(message="Pin Code")])
+    Name_on_Card = StringField('Name_on_Card_label', validators=[InputRequired(message="Name")])
+    Credit_card_number = StringField('Credit_card_number_label', validators=[InputRequired(message="1111-2222-3333-4444")])
+    Exp_Month = StringField('Exp_Month_label', validators=[InputRequired(message="Month")])
+    Exp_Year = StringField('Exp_Year_label', validators=[InputRequired(message="Year")])
+    CVV = StringField('CVV_label', validators=[InputRequired(message="000")])
+    #email = StringField('Email',validators=[DataRequired(), Email()])
+    #picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
+    submit_checkout = SubmitField('CheckOut')
+
+
 
 #    def validate_email(self, email):
 #        if email.data != current_user.email:
