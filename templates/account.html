@@ -7,28 +7,66 @@
 
 {% block content %}
 
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    {% for message in messages %}
-      <h3>{{ message }}</h3>
-    {% endfor %}
-  {% endif %}
-{% endwith %}
-    <form action="{{ url_for('account') }}", method="POST">
-        {{displayField(form.username, 'Username', autocomplete="off", autofocus=true)}}
-        {{displayField(form.firstname, 'firstname', autocomplete="off", autofocus=true)}}
-        {{displayField(form.lastname, 'lastname', autocomplete="off", autofocus=true)}}
-        {{displayField(form.address, 'address', autocomplete="off", autofocus=true)}}
-        {{displayField(form.mobileno, 'mobileno', autocomplete="off", autofocus=true)}}
 
-        <div>
-            {{ form.submit_update }}
+
+
+
+
+    <div class="cont">
+        <div class="form account">
+            <h2> Account Details </h2>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                {% for message in messages %}
+                  <h3>{{ message }}</h3>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+            <form action="{{ url_for('account') }}", method="POST">
+                <label>
+                    {{displayField(form.username, 'Username', autocomplete="off", autofocus=true)}}
+                </label>
+
+                <label>
+                      {{displayField(form.firstname, 'firstname', autocomplete="off", autofocus=true)}}
+                </label>
+
+                <label>
+                    {{displayField(form.lastname, 'lastname', autocomplete="off", autofocus=true)}}
+                </label>
+
+                <label>
+                    {{displayField(form.address, 'address', autocomplete="off", autofocus=true)}}
+                </label>
+
+                <label>
+                    {{displayField(form.mobileno, 'mobileno', autocomplete="off", autofocus=true)}}
+                </label>
+
+
+
+                <div>
+                    <button class="update" type="button">
+                        {{ form.submit_update }}
+                    </button>
+                </div>
+
         </div>
+        <div class="sub-cont">
+            <div class="img">
+                <div class="img-text m-up">
+                    <p>Don't have an account ?</p>
+                </div>
+                <div class="img-btn">
+                    <a href="/templates/index.html"><span class="link">Register</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+            {{ form.csrf_token }}
 
-        {{ form.csrf_token }}
+        </form>
 
-    </form>
-
-
+        <!-- <script src="/static/js/script.js"></script> -->
 
 {% endblock %}

@@ -69,7 +69,7 @@ def logout():
 def account():
     UpdateAccount_form = UpdateAccountForm()
     if UpdateAccount_form.validate_on_submit():
-        import pdb; pdb.set_trace()
+        #import pdb; pdb.set_trace()
         username = UpdateAccount_form.username.data
         firstname= UpdateAccount_form.firstname.data
         lastname= UpdateAccount_form.lastname.data
