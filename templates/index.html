@@ -2,23 +2,40 @@
 
 {% extends "base.html" %}
 
-{% block title %} Registration  {% endblock %}
+{% block title %} Registration {% endblock %}
 
 {% block content %}
-    <h1>Let's get started!</h1>
+    <div class="cont">
+        <div class="sub-cont">
+            <h2> Sign Up </h2>
+                <form action="{{ url_for('index') }}", method="POST">
+                    <label>
+                        {{displayField(form.username, 'Username', autocomplete="off", autofocus=true)}}
+                    </label>
+                    <label>
+                        {{displayField(form.password, 'Password')}}
+                    </label>
+                    <label>
+                        {{displayField(form.confirm_password, 'Retype Password')}}
+                    </label>
+                    <div class>
+                        <button type="button" class="submit">{{ form.submit_button }}</button> 
+                    </div>
 
-    <form action="{{ url_for('index') }}", method="POST">
-       
-        {{displayField(form.username, 'Username', autocomplete="off", autofocus=true)}}
-        {{displayField(form.password, 'Password')}}
-        {{displayField(form.confirm_password, 'Retype Password')}}
-
-
-        <div>
-            {{ form.submit_button }}
+                    <div class="img">
+                        <div class="img-text m-up">
+                          <p>Already Registered?</p>
+                        </div>
+                        <div class="img-btn">
+                            <a href="/templates/login.html"> <span class="m-up"> Login </span> </a>
+                          </div>
+                    </div>
+                </div> 
         </div>
-
         {{ form.csrf_token }}
         
     </form>
+    
+    <!-- <script src="/static/js/script.js"></script> -->
+
 {% endblock %}

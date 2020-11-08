@@ -2,21 +2,49 @@
 
 {% extends 'base.html' %}
 
-{% block title %} Login  {% endblock %}
+{% block title %} Login {% endblock %}
 
 {% block content %}
-    <h1>Login now!</h1>
-    <p>Enter your username/password to start med-e-care.</p>
+    <div class="cont">
+        <div class="form sign-in">
+            <h2> Login </h2>
+            <form action="{{ url_for('login') }}", method="POST">
+                <label>
+                    {{displayField(form.username, 'Username', autocomplete="off", autofocus=true)}}
+                </label>
 
-    <form action="{{ url_for('login') }}", method="POST">
-        {{displayField(form.username, 'Username', autocomplete="off", autofocus=true)}}
-        {{displayField(form.password, 'Password')}}
+                <label>
+                    {{displayField(form.password, 'Password')}}
+                </label>
 
-        <div>
-            {{ form.submit_button }}
+                <div>
+                    <button class="submit" type="button">
+                        {{ form.submit_button }}
+                    </button>
+                </div>
+                
+                <p class="forgot-pass">Forgot Password?</p>
+                <div class="social-media">
+                    <ul>
+                    <li><img src="/static/images/gmail.png"></li>
+                    </ul>
+                </div>
         </div>
+        <div class="sub-cont">
+            <div class="img">
+                <div class="img-text m-up">
+                    <p>Don't have an account ?</p>
+                </div>
+                <div class="img-btn">
+                    <a href="/templates/index.html"><span class="link">Register</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+            {{ form.csrf_token }}
+            
+        </form>
 
-        {{ form.csrf_token }}
-        
-    </form>
+        <!-- <script src="/static/js/script.js"></script> -->
+
 {% endblock %}
