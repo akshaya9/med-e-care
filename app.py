@@ -117,6 +117,24 @@ def checkout():
     return render_template("checkout.html",form= checkout_form)
 
 
+@app.route("/addmedicine",methods=['GET','POST'])
+def addmedicine():
+    med_form = MedicineForm()
+    if med_form.validate_on_submit():
+    #if request.method == "POST":
+        getmedicine = med_form.name_label.data
+        
+        #db.session.add(product)
+        getprize = med_form.prize_label.data
+        
+        pro = medicine(name=getmedicine,prize=getprize)
+        db.session.add(pro)
+        db.session.commit()
+        return redirect(url_for('addmedicine'))
+    
+    return render_template("addmedicine.html",medicines='medicines')
+
+
 #always true
 if __name__ == "__main__":
     app.run(debug=True)

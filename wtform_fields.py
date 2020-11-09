@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, IntegerField
 from wtforms.validators import InputRequired, Length, EqualTo, ValidationError
 from passlib.hash import pbkdf2_sha256
 from models import User
@@ -66,7 +66,10 @@ class CheckOutForm(FlaskForm):
     #picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
     submit_checkout = SubmitField('CheckOut')
 
-
+class MedicineForm(FlaskForm):
+    name = StringField('name_label',validators=[InputRequired(message="Name")])
+    prize = IntegerField('prize_label',validators=[InputRequired(message="cost")])
+    submit = SubmitField('update')
 
 #    def validate_email(self, email):
 #        if email.data != current_user.email:
