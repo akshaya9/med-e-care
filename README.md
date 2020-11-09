@@ -10,9 +10,9 @@ Here, "desired name" with quotes should be replaced.
 ~~~
 python3 -m venv "desired name"
 ~~~
-Enter the virtual environment
+Enter the virtual environment. Replace 'venv' with your virtualenv name.
 ~~~
-Eg:   . venv/bin/activate
+Eg:   source venv/bin/activate
 ~~~
 Install the requirements
 ~~~
