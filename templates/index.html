@@ -7,7 +7,16 @@
 {% block content %}
     <div class="cont">
         <div class="sub-cont">
-            <h2> Sign Up </h2>
+            <div class="img">
+                <div class="img-text m-up">
+                      <p>Already Registered?</p>
+                </div>
+                <div class="img-btn">
+                    <a href="/templates/login.html"> <span class="m-up"> Login </span> </a>
+                </div>
+            </div>
+            <div class="form sign-in">
+                <h2> Sign Up </h2>
                 <form action="{{ url_for('index') }}", method="POST">
                     <label>
                         {{displayField(form.username, 'Username', autocomplete="off", autofocus=true)}}
@@ -18,20 +27,12 @@
                     <label>
                         {{displayField(form.confirm_password, 'Retype Password')}}
                     </label>
-                    <div class>
+                    <div>
                         <button type="button" class="submit">{{ form.submit_button }}</button> 
-                    </div>
-
-                    <div class="img">
-                        <div class="img-text m-up">
-                          <p>Already Registered?</p>
-                        </div>
-                        <div class="img-btn">
-                            <a href="/templates/login.html"> <span class="m-up"> Login </span> </a>
-                          </div>
-                    </div>
-                </div> 
+                    </div>            
+            </div> 
         </div>
+    </div>
         {{ form.csrf_token }}
         
     </form>

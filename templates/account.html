@@ -7,21 +7,16 @@
 
 {% block content %}
 
-
-
-
-
-
     <div class="cont">
         <div class="form account">
             <h2> Account Details </h2>
-            {% with messages = get_flashed_messages() %}
-              {% if messages %}
-                {% for message in messages %}
-                  <h3>{{ message }}</h3>
-                {% endfor %}
-              {% endif %}
-            {% endwith %}
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                        <h3 style="text-align: center;">{{ message }}</h3>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
             <form action="{{ url_for('account') }}", method="POST">
                 <label>
                     {{displayField(form.username, 'Username', autocomplete="off", autofocus=true)}}
@@ -43,14 +38,12 @@
                     {{displayField(form.mobileno, 'mobileno', autocomplete="off", autofocus=true)}}
                 </label>
 
-
-
                 <div>
-                    <button class="update" type="button">
+                    <button class="submit" type="button">
                         {{ form.submit_update }}
                     </button>
                 </div>
-
+                
         </div>
         <div class="sub-cont">
             <div class="img">
@@ -66,7 +59,4 @@
             {{ form.csrf_token }}
 
         </form>
-
-        <!-- <script src="/static/js/script.js"></script> -->
-
 {% endblock %}
