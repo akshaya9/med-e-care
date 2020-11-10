@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for,flash
+from flask import Flask, render_template, redirect, url_for,flash, request
 from passlib.hash import pbkdf2_sha256 #password based key dervation func version2 for hashing
 from flask_login import LoginManager,login_user, current_user, login_required, logout_user
 from wtform_fields import *
@@ -120,19 +120,16 @@ def checkout():
 @app.route("/addmedicine",methods=['GET','POST'])
 def addmedicine():
     med_form = MedicineForm()
-    if med_form.validate_on_submit():
-    #if request.method == "POST":
-        getmedicine = med_form.name_label.data
-        
-        #db.session.add(product)
-        getprize = med_form.prize_label.data
-        
+    if request.method == "POST":
+        # return 'done and dusted!'
+        getmedicine = med_form.name.data
+        getprize = med_form.prize.data
         pro = medicine(name=getmedicine,prize=getprize)
         db.session.add(pro)
         db.session.commit()
-        return redirect(url_for('addmedicine'))
+        return 'Added the medicine succesfully :)'
     
-    return render_template("addmedicine.html",medicines='medicines')
+    return render_template("addmedicine.html" ,form=med_form, medicines='medicines')
 
 
 #always true

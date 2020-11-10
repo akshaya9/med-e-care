@@ -1,4 +1,8 @@
+{% from 'form_helper.html' import displayField %}
+
 {% extends "layout.html" %}
+
+{% block title %} Add medicines {% endblock %}
 
 {% block content %}
 <div class="container">
@@ -7,10 +11,16 @@
 		<div class="col-md-6">
 			{% if medicines %}
 			<h1 class="text-center mt-5">Add a medicine</h1>
-			<form action="" method="POST">
-				<input type="text" name="med" class="form-control">
+			<form action="{{ url_for('addmedicine') }}", method="POST">
+
+				{{displayField(form.name, 'Name')}}
+				{{displayField(form.prize, 'cost')}}
+				<!-- <input type="text" name="med" class="form-control">
 				<input type="text" name="cost" class="form-control">
-				<input type="submit" value="Add medicine" class="btn btn-info mt-2">
+				<input type="submit" value="Add medicine" class="btn btn-info mt-2"> -->
+				<div>
+					{{ form.submit_medicine }}
+				</div>
 			</form>
 			{% endif %}
 

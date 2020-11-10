@@ -8,8 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css')}}">
 
-    <title>{{ title }}</title>
-  </head>
+    <title>{% block title %}{% endblock %} - medEcare </title>  </head>
   <body>
     {% block content %}
     {% endblock content %}
@@ -20,6 +19,5 @@
     <script src="{{ url_for('static',filename='js/jquery-3.5.1.slim.min.js')}}"></script>
     <script src="{{ url_for('static',filename='js/popper.min.js')}}"></script>
     <script src="{{ url_for('static',filename='js/bootstrap.min.js')}}"></script>
-    -->
   </body>
 </html>

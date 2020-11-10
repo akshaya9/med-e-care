@@ -69,7 +69,7 @@ class CheckOutForm(FlaskForm):
 class MedicineForm(FlaskForm):
     name = StringField('name_label',validators=[InputRequired(message="Name")])
     prize = IntegerField('prize_label',validators=[InputRequired(message="cost")])
-    submit = SubmitField('update')
+    submit_medicine = SubmitField('Add medicine')
 
 #    def validate_email(self, email):
 #        if email.data != current_user.email:
