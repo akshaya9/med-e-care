@@ -56,7 +56,7 @@ def login():
 def dashboard():
     # if not current_user.is_authenticated:
     #     return current_app.login_manager.unauthorized()
-    return "Welcome to dashboard!"
+    return render_template("dashboard.html")
 
 
 @app.route("/logout", methods=['GET'])
