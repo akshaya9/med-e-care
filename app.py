@@ -3,6 +3,7 @@ from passlib.hash import pbkdf2_sha256 #password based key dervation func versio
 from flask_login import LoginManager,login_user, current_user, login_required, logout_user
 from wtform_fields import *
 from models import *
+from chatbot import *
 from flask import session
 from sqlalchemy.orm.exc import UnmappedClassError, UnmappedInstanceError
 
@@ -130,6 +131,15 @@ def addmedicine():
         return 'Added the medicine succesfully :)'
     
     return render_template("addmedicine.html" ,form=med_form, medicines='medicines')
+
+@app.route("/chatbot",methods=['GET','POST'])
+def chatbot():
+    return render_template("home.html")
+
+@app.route("/get")
+def get_bot_response():
+    userText = request.args.get('msg')
+    return str(bot.get_response(userText))
 
 
 #always true
